@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programări - PC-Doctors</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+     
+      <div class="flex flex-col items-start">
+        <div class="flex items-center">
+          <img src="./assets/logo-BZ5dIIJy.jpg" alt="PC-Doctors Logo" class="h-10 w-auto">
+          <h1 class="text-lg md:text-2xl font-bold text-gray-800 ml-4">Programări</h1>
+        </div>
+        
+        <a href="index.html" class="mt-2 text-sm bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
+          Acasă
+        </a>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <a href="cosul-meu.html" class="flex items-center text-gray-800 hover:text-green-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-2 14H5L3 3zm5 16h8m-4-6v6" />
+          </svg>
+          <span>Coșul meu</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  
+  <div class="container mx-auto px-6 py-16">
+   
+    <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-8">Fă-ți o programare:</h2>
+
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+     
+      <div>
+        <input id="calendar" class="border border-gray-300 p-2 rounded-md w-full shadow-md focus:outline-none focus:ring-2 focus:ring-green-600" placeholder="Alege o dată">
+        <div class="flex justify-end mt-2">
+          <button id="cancel-btn" class="bg-red-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-700 focus:outline-none mr-2">Anulează</button>
+          <button id="ok-btn" class="bg-green-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-700 focus:outline-none">OK</button>
+        </div>
+      </div>
+
+      
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">Programările tale</h3>
+        <textarea id="appointments" class="border border-gray-300 p-2 rounded-md w-full h-40 resize-none shadow-md focus:outline-none focus:ring-2 focus:ring-green-600" readonly>- zi/luna/an ora: </textarea>
+      </div>
+    </div>
+  </div>
+
+ 
+  <footer class="bg-white py-6">
+    <div class="container mx-auto text-center text-gray-600">
+      &copy; 2024 PC-Doctors. Toate drepturile rezervate.
+    </div>
+  </footer>
+
+ 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+     
+      flatpickr('#calendar', {
+        enableTime: true,
+        dateFormat: 'd/m/Y H:i',
+      });
+
+      
+      const okButton = document.getElementById('ok-btn');
+      const cancelButton = document.getElementById('cancel-btn');
+      const calendarInput = document.getElementById('calendar');
+      const appointments = document.getElementById('appointments');
+
+      okButton.addEventListener('click', () => {
+        const selectedDate = calendarInput.value;
+        if (selectedDate) {
+          appointments.value += `\n- ${selectedDate}`;
+          calendarInput.value = '';
+        }
+      });
+
+      cancelButton.addEventListener('click', () => {
+        calendarInput.value = '';
+      });
+    });
+  </script>
+</body>
+</html>

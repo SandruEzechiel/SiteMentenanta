@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coșul Tău - PC-Doctors</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    
+    window.onload = function() {
+      let cos = JSON.parse(localStorage.getItem('cos')) || [];
+      const list = document.getElementById("listaCos");
+      list.innerHTML = ""; 
+
+      if (cos.length === 0) {
+        list.innerHTML = "<li class='py-2'>Coșul tău este gol</li>";
+      } else {
+        cos.forEach(function(serviciu, index) {
+          const listItem = document.createElement("li");
+          listItem.classList.add("border-b", "py-2", "flex", "items-center", "justify-between");
+          listItem.textContent = serviciu;
+
+          
+          const removeButton = document.createElement("button");
+          removeButton.classList.add("bg-red-600", "text-white", "px-4", "py-2", "rounded", "hover:bg-red-700", "focus:outline-none");
+          removeButton.textContent = "Scoate";
+          
+          
+          removeButton.onclick = function() {
+            cos.splice(index, 1); 
+            localStorage.setItem('cos', JSON.stringify(cos)); 
+            window.onload(); 
+          };
+
+          
+          listItem.appendChild(removeButton);
+          list.appendChild(listItem);
+        });
+      }
+    };
+  </script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+      
+      <div class="flex flex-col items-start">
+        <div class="flex items-center">
+          <img src="public/logo.jpg" alt="PC-Doctors Logo" class="h-10 w-auto">
+          <h1 class="text-lg md:text-2xl font-bold text-gray-800 ml-4">Coșul meu</h1>
+        </div>
+        
+        <a href="index.html" class="mt-2 text-sm bg-green-600 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+          Acasă
+        </a>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="container mx-auto px-6 py-16">
+    <h2 class="text-xl font-bold mb-6 text-gray-800">Serviciile alese de tine:</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      
+      <div class="col-span-1">
+        
+      </div>
+
+      
+      <div class="col-span-3">
+        <ul id="listaCos" class="bg-white p-4 shadow-md rounded-md">
+          
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  
+  <footer class="bg-white py-6">
+    <div class="container mx-auto text-center text-gray-600">
+      &copy; 2024 PC-Doctors. Toate drepturile rezervate.
+    </div>
+  </footer>
+
+</body>
+</html>

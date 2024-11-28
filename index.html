@@ -1,15 +1,123 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Site Mentenanta</title>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  </head>
-  <body>
-    <div id="app"></div>
-    <h1>Site Mentenanta</h1>
-    <script type="module" src="/main.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PC-Doctors</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    #app-bar-menu {
+      transition: transform 0.3s ease;
+    }
+    .hidden-menu {
+      transform: translateX(-100%);
+    }
+    .visible-menu {
+      transform: translateX(0);
+    }
+    #overlay {
+      transition: opacity 0.3s ease;
+    }
+    .hidden-overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .visible-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans relative">
+
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex items-center justify-between py-4 px-6">
+      <div class="flex items-center space-x-4">
+        <img src="public/logo.jpg" alt="PC-Doctors Logo" class="h-8 w-auto">
+        <a href="index.html" class="text-lg font-medium text-gray-800 hover:text-green-600">Acasă</a>
+      </div>
+      <h1 class="text-lg sm:text-xl font-bold text-gray-800 text-center flex-1">PC-Doctors</h1>
+     
+      <div class="flex items-center">
+        <a href="cosul-meu.html" class="flex items-center text-gray-800 hover:text-green-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-2 14H5L3 3zm5 16h8m-4-6v6" />
+          </svg>
+          <span class="text-sm sm:text-base">Coșul meu</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+ 
+  <div class="relative">
+   
+    <button id="app-bar-toggle" class="bg-green-600 text-white px-4 py-2 rounded-md fixed top-20 left-4 z-50 shadow-lg hover:bg-green-700 focus:outline-none">
+      ☰ Meniu
+    </button>
+
+   
+    <div id="overlay" class="hidden-overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+  
+    <div id="app-bar-menu" class="hidden-menu fixed inset-y-0 left-0 bg-white shadow-lg w-64 z-50 overflow-y-auto">
+      <nav class="flex flex-col p-4 space-y-2">
+        <a href="servicii.html" class="block text-gray-800 hover:bg-green-600 hover:text-white px-4 py-2 rounded-md">Servicii</a>
+        <a href="despre-mine.html" class="block text-gray-800 hover:bg-green-600 hover:text-white px-4 py-2 rounded-md">Despre mine</a>
+        <a href="cosul-meu.html" class="block text-gray-800 hover:bg-green-600 hover:text-white px-4 py-2 rounded-md">Coșul meu</a>
+        <a href="recenzii.html" class="block text-gray-800 hover:bg-green-600 hover:text-white px-4 py-2 rounded-md">Recenzii</a>
+        <a href="programari.html" class="block text-gray-800 hover:bg-green-600 hover:text-white px-4 py-2 rounded-md">Programări</a>
+        <a href="galerie.html" class="block text-gray-800 hover:bg-green-600 hover:text-white px-4 py-2 rounded-md">Galerie</a>
+        <a href="contact.html" class="block text-gray-800 hover:bg-green-600 hover:text-white px-4 py-2 rounded-md">Contact</a>
+        <a href="intrebari-frecvente.html" class="block text-gray-800 hover:bg-green-600 hover:text-white px-4 py-2 rounded-md">Întrebări frecvente</a>
+        <a href="oferte-speciale.html" class="block text-gray-800 hover:bg-green-600 hover:text-white px-4 py-2 rounded-md">Oferte speciale</a>
+      </nav>
+    </div>
+  </div>
+
+ 
+  <div class="container mx-auto px-4 py-12 flex flex-col space-y-8">
+  
+    <div class="bg-white p-6 shadow-lg rounded-md text-center text-gray-800">
+      <p class="text-base sm:text-lg">Calculatorul tău e stricat, merge foarte încet sau pur și simplu vrei să îl îmbunătățești? Vino la noi!</p>
+    </div>
+
+    
+    <div class="flex flex-col items-center space-y-6">
+      <a href="./contact.html">
+        <button class="bg-green-600 text-white px-6 py-3 rounded-md shadow-lg hover:bg-green-700 focus:outline-none text-sm sm:text-base">
+          Contactează-ne
+        </button>
+      </a>
+      <img src="https://thumbs.dreamstime.com/b/desene-animate-cu-notebook-ul-bolnav-ilustrarea-caricatului-de-34607971.jpg" alt="Calculator Stricat" class="w-full max-w-xs sm:max-w-sm rounded-lg shadow-lg">
+    </div>
+  </div>
+
+  
+  <footer class="bg-white py-4">
+    <div class="container mx-auto text-center text-gray-600 text-sm sm:text-base">
+      &copy; 2024 PC-Doctors. Toate drepturile rezervate.
+    </div>
+  </footer>
+
+  
+  <script>
+    const appBarToggle = document.getElementById('app-bar-toggle');
+    const appBarMenu = document.getElementById('app-bar-menu');
+    const overlay = document.getElementById('overlay');
+
+    function toggleMenu() {
+      appBarMenu.classList.toggle('hidden-menu');
+      appBarMenu.classList.toggle('visible-menu');
+      overlay.classList.toggle('hidden-overlay');
+      overlay.classList.toggle('visible-overlay');
+    }
+
+    
+    appBarToggle.addEventListener('click', toggleMenu);
+
+    
+    overlay.addEventListener('click', toggleMenu);
+  </script>
+</body>
 </html>
